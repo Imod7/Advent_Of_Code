@@ -1,9 +1,12 @@
 from operator import add
+from datetime import datetime
 
-moons_positions = [[14, 2, 8], [7, 4, 10], [1, 17, 16], [-4, -1, 1]]
+startTime = datetime.now()
+
+# moons_positions = [[14, 2, 8], [7, 4, 10], [1, 17, 16], [-4, -1, 1]]
 
 # First Example
-# moons_positions = [[-1, 0, 2], [2, -10, -7], [4, -8, 8], [3, 5, -1]]
+moons_positions = [[-1, 0, 2], [2, -10, -7], [4, -8, 8], [3, 5, -1]]
 # Second Example
 # moons_positions = [[-8, -10, 0], [5, 5, 10], [2, -7, 3], [9, -8, -3]]
 
@@ -40,11 +43,13 @@ def apply_gravity(i, j, sublist):
 #         for j, vel in range(len(vel_lst)):
 #             moons_positions_step[i][j] = moons_positions_step[i][j] + vel_lst[i][j]
 
-def motion_simulation(steps):
+def motion_simulation():
     global moons_positions_step
     global moons_velocity_step
-    count = 0
-    while count < steps:
+    steps = 0
+    flag = 0
+    while flag < 4:
+    # while count < 1000:
         # print("Simulation : Moons Positions Step")
         # print(moons_positions_step)
         moons_positions_new[:] = []
@@ -58,7 +63,7 @@ def motion_simulation(steps):
                 # print ("NEXT NUM : ", moons_positions[i][j], " coordinates : ", i, j)
                 # print(moons_positions_copy)
                 apply_gravity(i, j, sublist)
-        if count != 0:
+        if steps != 0:
             sum_vel_lst = [[sum(x) for x in zip(moons_velocity_new[i], moons_velocity_step[i])] for i in range(len(moons_velocity_new))]
             sum_lst = [[sum(x) for x in zip(moons_positions_new[i], moons_velocity_step[i])] for i in range(len(moons_positions_new))]
             # print("SUM")
@@ -67,20 +72,24 @@ def motion_simulation(steps):
         moons_positions_step = moons_positions_new.copy()
         moons_velocity_step[:] = []
         moons_velocity_step = moons_velocity_new.copy()
-        if count == 0:
-            print("Moons Positions after STEP ", count + 1)
-            print(moons_positions_step)
-            print("Moons Velocities after STEP ", count + 1)
-            print(moons_velocity_step)
-        if count != 0:
-            print("Moons Positions Final (velocity applied) after STEP ", count + 1)
+        # if steps == 0:
+        #     print("Moons Positions after STEP ", steps + 1)
+        #     print(moons_positions_step)
+        #     print("Moons Velocities after STEP ", steps + 1)
+        #     print(moons_velocity_step)
+        if steps != 0:
+            # print("Moons Positions Final (velocity applied) after STEP ", steps + 1)
             moons_positions_step = sum_lst.copy()
-            print(moons_positions_step)
-            print("Moons Velocity Final (velocity applied) after STEP ", count + 1)
+            # print(moons_positions_step)
+            # print("Moons Velocity Final (velocity applied) after STEP ", steps + 1)
             moons_velocity_step = sum_vel_lst.copy()
-            print(moons_velocity_step)
-        count += 1
-        print()
+            # print(moons_velocity_step)
+            # print()
+        steps += 1
+        if (moons_positions_step == moons_positions) and (moons_velocity_step == moons_velocity):
+            print("Returns in Initial State after : ", steps, " steps")
+            flag += 1
+    print("Returns in Initial State after : ", steps, " steps")
 
 print("Initial Moons Positions")
 print(moons_positions)
@@ -88,8 +97,7 @@ print("Initial Moons Velocities")
 print(moons_velocity)
 print()
 
-steps = 1000
-motion_simulation(steps)
+motion_simulation()
 
 def total_energy_per_moon():
     potential_energy = 0
@@ -121,4 +129,6 @@ total_energy_system += total_energy_per_moon()
 print("Total Energy in the System")
 print(total_energy_system)
 
-
+print()
+print("Time needed for the executable to run")
+print(datetime.now() - startTime)
