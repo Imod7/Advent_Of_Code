@@ -1,7 +1,12 @@
 from operator import add
 
-# moons_positions = [[14, 2, 8], [7, 4, 10], [1, 17, 16], [-4, -1, 1]]
-moons_positions = [[-1, 0, 2], [2, -10, -7], [4, -8, 8], [3, 5, -1]]
+moons_positions = [[14, 2, 8], [7, 4, 10], [1, 17, 16], [-4, -1, 1]]
+
+# First Example
+# moons_positions = [[-1, 0, 2], [2, -10, -7], [4, -8, 8], [3, 5, -1]]
+# Second Example
+# moons_positions = [[-8, -10, 0], [5, 5, 10], [2, -7, 3], [9, -8, -3]]
+
 moons_velocity = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
 moons_positions_step = moons_positions.copy()
@@ -47,18 +52,12 @@ def motion_simulation(steps):
         for i, sublist in enumerate(moons_positions_step):
             # print ("index_i : ", index, " sublist = ", sublist)
             moons_positions_new.append([])
-            # print("== Moons positions ==")
-            # print(moons_positions_new)
             moons_velocity_new.append([])
             for j, nums in enumerate(sublist):
                 # print()
                 # print ("NEXT NUM : ", moons_positions[i][j], " coordinates : ", i, j)
                 # print(moons_positions_copy)
                 apply_gravity(i, j, sublist)
-        # print("Moons NEW")
-        # print(moons_positions_new)
-        # print("Moons veloc NEW")
-        # print(moons_velocity_new)
         if count != 0:
             sum_vel_lst = [[sum(x) for x in zip(moons_velocity_new[i], moons_velocity_step[i])] for i in range(len(moons_velocity_new))]
             sum_lst = [[sum(x) for x in zip(moons_positions_new[i], moons_velocity_step[i])] for i in range(len(moons_positions_new))]
@@ -89,16 +88,32 @@ print("Initial Moons Velocities")
 print(moons_velocity)
 print()
 
-steps = 4
+steps = 1000
 motion_simulation(steps)
 
+def total_energy_per_moon():
+    potential_energy = 0
+    kinetic_energy = 0
+    total_energy = 0
+    for poslst, velst in zip(moons_positions_step, moons_velocity_step):
+        # print(i)
+        # print(j)
+        poslst_abs =  [abs(ele) for ele in poslst]
+        potential_energy = sum(poslst_abs)
+        # print(list_abs)
+        # potential_energy += poslst_sum
+        print("Potential Energy")
+        print(potential_energy)
+        velst_abs =  [abs(ele) for ele in velst]
+        kinetic_energy = sum(velst_abs)
+        # print(list_abs)
+        # kinetic_energy += sum_abs
+        print("Kinetic Energy")
+        print(kinetic_energy)
+        total_energy += potential_energy * kinetic_energy
+        print("Total Energy")
+        print(total_energy)
+    return (total_energy)
 
-
-# for i, sublist in enumerate(moons_positions_step):
-#     apply_velocity(sublist, moons_velocity)
-
-# [sum(x) for x in zip(list1, list2)]
-
-# sum_lst = list( map(add, moons_positions_step, moons_velocity_step) )
-
-
+total_energy_system = 0
+total_energy_system += total_energy_per_moon()
