@@ -19,7 +19,7 @@ class Passport:
         for key in batch_data:
             setattr(self, key, batch_data[key])
 
-    def check_validity(self):
+    def check_missing_fields(self):
         """Checking if the passport object is valid"""
         if self.ecl is None:
             pass
@@ -92,7 +92,7 @@ def main() -> None:
         # for key, value in batch.items():
         #     print(key, " ", value)
         obj = Passport(batch)
-        obj.check_validity()
+        obj.check_missing_fields()
         if obj.valid is True:
             valid_objects += 1
     print("Amount of valid passports : ", valid_objects)

@@ -10,7 +10,7 @@ However, I don't know how the use of classes and objects affects the memory effi
 - Then when I have one line per batch (I am in function "list_of_batches") I call function "split_data" that splits the line/batch and creates a dictionary with key value pairs for all the fields and corresponding values of the passport.
 - Whenever I return a dictionary with all the fields of a batch I append it to list "all_batches" so I have all the batches in a list (a list of dictionaries). This happens also in function "list_of_batches".
 - Then (in function "main") for each dictionary/batch in my list "all_batches", I create an object of class Passport and I populate the corresponding properties.
-- After I populate the properties, I call method check_validity to check if one of the available fields (except the cid) is not populated. If one is not populated then I set the object's property "valid" to False.
+- After I populate the properties, I call method "check_missing_fields" to check if one of the available fields (except the cid) is not populated. If one is not populated then I set the object's property "valid" to False.
 - Last I have a variable "valid_objects" that counts the valid objects and this number is my answer to Part 01.
 
 
