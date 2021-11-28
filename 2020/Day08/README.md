@@ -1,5 +1,5 @@
 ## Advent of Code 2020 - Day 08 Part 01
-
+https://adventofcode.com/2020/day/8
 
 ### Prerequisites
 - node.js installed
