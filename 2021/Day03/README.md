@@ -26,4 +26,4 @@ https://www.freecodecamp.org/news/reduce-f47a7da511a9/
 ### Solution
 - Correct Answer (based on the given input) : 1092896
 
-![Aoc Part 01 - Day 3 - 2021](master/images/2021/day03_part01.png "Aoc Part 01 - Day 3 - 2021")
+![Aoc Part 01 - Day 3 - 2021](../../images/2021/day03_part01.png "Aoc Part 01 - Day 3 - 2021")
