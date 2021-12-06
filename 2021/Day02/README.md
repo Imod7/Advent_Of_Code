@@ -93,6 +93,8 @@ every time we find a forward so maybe I need to
 1. create an array of aim where it has values only in the forward positions.
 2. create an array of forwards with only values in the forward positions.
 
+- Do not forget that when you slice the second value is not inclusive!!!
+
 ### Slice vs For loop
 - The code where I slice and recalculate the ```aim``` is very ineffient but it was good practice to see the difference with a for loop. 
 
