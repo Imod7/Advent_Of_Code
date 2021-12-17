@@ -13,26 +13,21 @@ https://adventofcode.com/2021/day/4
 - Run the code in a terminal with the command ```$ node part01.js```
 
 ### Solution
-- Correct Answer (based on the given input) : 
-
-### Thoughts while doing Part 01
+- Correct Answer (based on the given input) : 29440
 
 #### Save the data (& yourself! :P)
 So how to best store the input data so we can then access what we need in an efficient way (fast & easy). 
+  * I saved every board in an array (all rows and columns in one array of 25 elements `array_boards`)
+  * For every board / array I also created a dictionary (`board_dicts`) with key the number element and value a string that it is a combination of the flag + the index of the element in the board. When all numbers are saved, all have flag zero.
 
-I will try the following way :
-  * First I save all the input in an array (`input_data`) with my generic function (`load_input_in_array`).
-  * Then I take the first line which is the caller numbers and save it in the `caller_nums array` and the rest (from the element 1 onwards) in `boards`.
-  * But maybe it is a good idea (idk, I am just testing) to save the boards as an array of arrays of arrays which will correspond to :
-    * the outer array will be the wrapper of all the data (all boards and all rows of every board).
-    * the first level inner array to indicate the corresponding board.
-    * the second level inner array to indicate the corresponding row of every board.
-  * **Note** : to save every board in a separate array I use my all time favourite **modulo**!
+#### Iterate & Check
+  * For every number in the caller array (array that contains all the numbers that were drawn) I check against every board.
+  * If the number exists in a board then :
+      1) I change its flag from 0 to 1 (in `board_dicts`).
+      2) Check if its row or column is a winning one. This check is done by getting all the elements in the same row and check their flag (from the dictionary). The same check is done for the column.
+      3) As soon as I find a row or column that all its elements have their flag equal to 1, I call Bingo and calculate the sum (of items that have flag 0).
+      4) Then I calculate also the product with the drawn number and give this as the solution to the puzzle.
 
-  #### Iterate & Check (LE winner!)
-  Now I need to iterate and check. Not yer implemented but I will try to :
-  * Take the first 5 numbers from `caller_nums`.
-  * Go through all the boards.
-  * In every board check every row against the `caller_nums`.
-
-  _To Be Continued! Sooon!!!_
+### Thoughts while doing Part 01
+* When using a dictionary, the time to access/retrieve an element is very fast ( O(1) ). So by saving the elements of the board also in a dictionary, I can see very fast if a number/key exists in this board without doing any iteration (as I would do if I used an array).
+* The downside of the dictionary is that I do not know the order/position of the elements in the board. That is why I save "flag + index" of the element as its value in the dictionary. Since I know the index I can directly check the element's row and column without iterating the whole array.
